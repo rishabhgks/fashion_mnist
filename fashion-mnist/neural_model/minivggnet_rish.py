@@ -42,6 +42,17 @@ class MiniVGGNet:
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
 
+        # Third CONV => RELU => CONV => RELU => POOL layer set
+
+        model.add(Conv2D(128, (3, 3), padding="same"))
+        model.add(Activation("relu"))
+        model.add(BatchNormalization(axis=chanDim))
+        model.add(Conv2D(128, (3, 3), padding="same"))
+        model.add(Activation("relu"))
+        model.add(BatchNormalization(axis=chanDim))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+
         # first (and only) set of FC => RELU layers
 
         model.add(Flatten())
